@@ -27,6 +27,7 @@ jobs:
 
           - os: ubuntu-20.04
             os_short: linux
+            container: registry.gitlab.steamos.cloud/steamrt/sniper/sdk
 
     steps:
       - name: Prepare env
@@ -81,11 +82,6 @@ jobs:
         with:
           repository: alliedmodders/ambuild
           path: ambuild
-
-      - name: Setting up Python
-        uses: actions/setup-python@v2
-        with:
-          python-version: '3.x'
 
       - name: Setting up ambuild
         working-directory: ambuild
