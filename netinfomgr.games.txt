@@ -9,7 +9,7 @@
                 "signature" "CBaseClient::SendSnapshot"
                 "linux"
                 {
-                    "read"  "401"
+                    "read"  "200"
                 }
             }
         }
