@@ -105,7 +105,7 @@ jobs:
         run: |
           mkdir build
           cd build
-          python ../configure.py --enable-optimize --sm-path="${{ github.workspace }}/sourcemod-${{ matrix.sm_version }}" --mms-path="${{ github.workspace }}/metamod-${{ matrix.mm_version }}"
+          python ../configure.py --enable-optimize --hl2sdk-root="${{ github.workspace }}/hl2sdk-l4d2" --sm-path="${{ github.workspace }}/sourcemod-${{ matrix.sm_version }}" --mms-path="${{ github.workspace }}/metamod-${{ matrix.mm_version }}"
           ambuild
 
       - name: Uploading package
