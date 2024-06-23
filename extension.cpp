@@ -106,7 +106,7 @@ bool NetInfoMgr::SDK_OnLoad(char *error, size_t maxlen, bool late)
     g_pHostRunFrame->EnableDetour();
 
     //Forwards
-    g_pOnFrameDataUpdatedForward = forwards->CreateForward("NIM_OnFrameDataUpdated", ET_Hook, 3, NULL, Param_FloatByRef, Param_FloatByRef, Param_FloatByRef);
+    g_pOnFrameDataUpdatedForward = forwards->CreateForward("NIM_OnFrameDataUpdated", ET_Hook, 3, NULL, Param_FloatByRef);
     
     sharesys->RegisterLibrary(myself, "netinfomgr");
 	return true;
