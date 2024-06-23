@@ -44,29 +44,21 @@ CDetour*        g_pHostRunFrame;
 IGameConfig*    g_pGameConfig = nullptr;
 IForward*       g_pOnFrameDataUpdatedForward = nullptr;
 
-float* host_frameendtime_computationduration = nullptr;
 float* host_frametime_stddeviation = nullptr;
-float* host_framestarttime_stddeviation = nullptr;
 
 void OnFrameDataUpdated()
 {
     const float flRatio = 1000.0;
 
-    float frameendtime_computationduration = *host_frameendtime_computationduration*flRatio;
     float frametime_stddeviation = *host_frametime_stddeviation*flRatio;
-    float framestarttime_stddeviation = *host_framestarttime_stddeviation*flRatio;
 
     cell_t result;
-    g_pOnFrameDataUpdatedForward->PushFloatByRef(&frameendtime_computationduration);
     g_pOnFrameDataUpdatedForward->PushFloatByRef(&frametime_stddeviation);
-    g_pOnFrameDataUpdatedForward->PushFloatByRef(&framestarttime_stddeviation);
     g_pOnFrameDataUpdatedForward->Execute(&result);
 
     if(result == Pl_Changed)
     {
-        *host_frameendtime_computationduration = frameendtime_computationduration/flRatio;
         *host_frametime_stddeviation = frametime_stddeviation/flRatio;
-        *host_framestarttime_stddeviation = framestarttime_stddeviation/flRatio;
     }
 }
 
@@ -95,24 +87,10 @@ bool NetInfoMgr::SDK_OnLoad(char *error, size_t maxlen, bool late)
         return false;
     }
 
-    g_pGameConfig->GetAddress("host_frameendtime_computationduration", (void**)&host_frameendtime_computationduration);
-    if(!host_frameendtime_computationduration)
-    {
-        snprintf(error, maxlen, "Failed to get address of host_frameendtime_computationduration");
-        return false;
-    }
-
     g_pGameConfig->GetAddress("host_frametime_stddeviation", (void**)&host_frametime_stddeviation);
     if(!host_frametime_stddeviation)
     {
         snprintf(error, maxlen, "Failed to get address of host_frametime_stddeviation");
-        return false;
-    }
-
-    g_pGameConfig->GetAddress("host_framestarttime_stddeviation", (void**)&host_framestarttime_stddeviation);
-    if(!host_frameendtime_computationduration)
-    {
-        snprintf(error, maxlen, "Failed to get address of host_framestarttime_stddeviation");
         return false;
     }
 
