@@ -68,7 +68,7 @@ jobs:
         with:
           repository: alliedmodders/sourcemod
           ref: ${{ matrix.sm_branch }}
-          path: sourcemod-${{ matrix.sm_version }}
+          path: ${{ github.workspace }}/sourcemod-${{ matrix.sm_version }}
           submodules: recursive
 
       - name: Checking out MM:Source
@@ -76,7 +76,7 @@ jobs:
         with:
           repository: alliedmodders/metamod-source
           ref: ${{ matrix.mm_branch }}
-          path: metamod-${{ matrix.mm_version }}
+          path: ${{ github.workspace }}/metamod-${{ matrix.mm_version }}
 
       - name: Checking out AMBuild
         uses: actions/checkout@v4
@@ -93,7 +93,7 @@ jobs:
         with:
           repository: alliedmodders/hl2sdk
           ref: csgo
-          path: hl2sdk-csgo
+          path: ${{ github.workspace }}/hl2sdk-csgo
 
       - name: Checking out own repository
         uses: actions/checkout@v4
